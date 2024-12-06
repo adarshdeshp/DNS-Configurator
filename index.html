@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS Configurator</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          transition: background-color 0.4s, color 0.4s;
+        }
+
+        label {
+          margin-right: 10px;
+        }
+
+        input {
+          padding: 5px;
+          width: 200px;
+          margin-bottom: 10px;
+        }
+
+        button {
+          margin: 5px;
+          padding: 10px;
+          font-size: 16px;
+        }
+
+        #status {
+          margin-top: 20px;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+          background-color: #121212;
+          color: white;
+        }
+
+        input.dark-mode, button.dark-mode {
+          background-color: #1e1e1e;
+          color: white;
+          border: 1px solid #444;
+        }
+
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 70px;
+          height: 34px;
+          margin-bottom: 20px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+
+        /* The slider */
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 26px;
+          width: 26px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+
+        input:checked + .slider {
+          background-color: #000;
+        }
+
+        input:focus + .slider {
+          box-shadow: 0 0 1px #2d2e2e;
+        }
+
+        input:checked + .slider:before {
+          -webkit-transform: translateX(26px);
+          -ms-transform: translateX(26px);
+          transform: translateX(26px);
+        }
+
+        .slider.round {
+          border-radius: 34px;
+        }
+
+        .slider.round:before {
+          border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+ 
+    <label class="switch">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="slider round"></span>
+    </label>
+
+    <h1>DNS Configurator</h1>
+    <div>
+        <label for="dnsipaddress">Enter DNS IP Address :</label>
+        <input id="dnsipaddress" type="text" placeholder="e.g., 8.0.8.0"/>
+    </div>
+    <div>
+        <button id="connectBtn" disabled>Connect</button>
+        <button id="disconnectBtn" disabled>Disconnect</button>
+    </div>
+
+    <div id="status" style="margin-top: 20px; font-weight: bold; color: gray;">
+        Status: Not connected
+    </div>
+    
+    <script>
+        // JavaScript for dark mode toggle
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        darkModeToggle.addEventListener("change", () => {
+            document.body.classList.toggle("dark-mode");
+            const inputs = document.querySelectorAll("input");
+            const buttons = document.querySelectorAll("button");
+            
+            inputs.forEach(input => input.classList.toggle("dark-mode"));
+            buttons.forEach(button => button.classList.toggle("dark-mode"));
+        });
+    </script>
+    <script src="renderer.js"></script>
+</body>
+</html>
