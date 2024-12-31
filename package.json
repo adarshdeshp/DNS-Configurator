@@ -2,22 +2,69 @@
   "name": "dns",
   "version": "1.0.0",
   "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
-  },
-  "keywords": [],
+  "description": "DNS Changer App",
   "author": "",
   "license": "ISC",
-  "description": "",
+  "keywords": [],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build": "electron-builder",
+    "publish:linux": "electron-builder --linux -p always",
+    "publish:win": "electron-builder --win -p always",
+    "publish:auto": "electron-builder -p always",
+    "publish:mac": "electron-builder --mac -p always"
+  },
   "devDependencies": {
     "@types/node": "^22.10.1",
-    "electron": "^33.2.1"
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
   },
   "dependencies": {
     "dnschanger-cli": "^1.0.0",
     "electron-sudo": "^4.0.12",
     "is-admin": "^4.0.0",
     "sudo-prompt": "^9.2.1"
+  },
+  "build": {
+    "appId": "com.dnschanger.app",
+    "productName": "DNS Changer",
+    "directories": {
+      "output": "release/${version}"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme,test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/.bin",
+      "!**/*.{o,hprof,orig,pyc,pyo,rbc}",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,__pycache__,thumbs.db,.gitignore,.gitattributes,.editorconfig,.flowconfig,.yarn-metadata.json,.idea,appveyor.yml,.travis.yml,circle.yml,npm-debug.log,.nyc_output,yarn.lock,.yarn-integrity}",
+      "!release"
+    ],
+    "asar": true,
+    "win": {
+      "target": ["nsis", "zip"],
+      "icon": "public/icons/icon.ico"
+    },
+    "linux": {
+      "target": ["AppImage", "deb", "rpm"],
+      "icon": "public/icons/icon.png",
+      "category": "Utility"
+    },
+    "mac": {
+      "target": ["dmg", "zip"],
+      "icon": "public/icons/icon.icns",
+      "category": "Utility"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "adarshdeshp",
+      "repo": "DNS-CONFIGURATOR"
+    }
   }
 }
