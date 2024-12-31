@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "main.js",
   "description": "DNS Changer App",
-  "author": "",
+  "author": {
+  "name": "Adarsh Deshpande",
+  "email": "addu9480@gmail.com"
+  },
   "license": "ISC",
   "keywords": [],
   "scripts": {
