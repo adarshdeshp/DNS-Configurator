@@ -1,0 +1,65 @@
+### Updated Pre-Release Workflow
+name: Pre-Release Workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "README.md"
+      - "*.md"
+
+jobs:
+  publish_on_linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Node v20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Pre-Release Application
+        run: npm run build
+
+      - name: Package Pre-Release Application
+        run: npm run publish:auto
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: pre-release-build
+          path: dist/
+
+  publish_on_windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Node v20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Pre-Release Application
+        run: npm run build
+
+      - name: Package Pre-Release Application
+        run: npm run publish:auto
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: pre-release-build
+          path: dist/

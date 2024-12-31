@@ -1,0 +1,90 @@
+name: Release Workflow
+
+on:
+  push:
+    branches:
+      - release
+    paths-ignore:
+      - "README.md"
+      - "*.md"
+
+jobs:
+  publish_on_linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Node v20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Production Application
+        run: npm run build
+
+      - name: Package Production Application
+        run: npm run publish:linux
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: production-build
+          path: dist/
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          tag_name: ${{ github.run_id }}
+          release_name: Release ${{ github.run_id }}
+          body: |
+            ## What's Changed
+            - Production release for ${{ github.run_id }}
+          draft: false
+          prerelease: false
+
+  publish_on_windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Node v20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Production Application
+        run: npm run build
+
+      - name: Package Production Application
+        run: npm run publish:win
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: production-build
+          path: dist/
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          tag_name: ${{ github.run_id }}
+          release_name: Release ${{ github.run_id }}
+          body: |
+            ## What's Changed
+            - Production release for ${{ github.run_id }}
+          draft: false
+          prerelease: false
