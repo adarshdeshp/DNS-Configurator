@@ -4,11 +4,11 @@
   "main": "main.js",
   "description": "DNS Changer App",
   "author": {
-  "name": "Adarsh Deshpande",
-  "email": "addu9480@gmail.com"
+    "name": "Adarsh Deshpande",
+    "email": "addu9480@gmail.com"
   },
-  "license": "ISC",
-  "keywords": [],
+  "license": "MIT",
+  "keywords": ["dns", "changer", "network", "utility"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
@@ -30,7 +30,7 @@
     "sudo-prompt": "^9.2.1"
   },
   "build": {
-    "appId": "com.dnschanger.app",
+    "appId": "com.adarshdeshp.dnschanger",
     "productName": "DNS Changer",
     "directories": {
       "output": "release/${version}"
@@ -52,7 +52,8 @@
     "linux": {
       "target": ["AppImage", "deb", "rpm"],
       "icon": "public/icons/icon.png",
-      "category": "Utility"
+      "category": "Utility",
+      "maintainer": "Adarsh Deshpande <addu9480@gmail.com>"
     },
     "mac": {
       "target": ["dmg", "zip"],
@@ -67,7 +68,8 @@
     "publish": {
       "provider": "github",
       "owner": "adarshdeshp",
-      "repo": "DNS-CONFIGURATOR"
+      "repo": "DNS-CONFIGURATOR",
+      "token": "${TOKEN}"
     }
   }
 }
