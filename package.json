@@ -69,7 +69,7 @@
       "provider": "github",
       "owner": "adarshdeshp",
       "repo": "DNS-CONFIGURATOR",
-      "token": "${TOKEN}"
+      "token": "${GH_TOKEN}"
     }
   }
 }
