@@ -67,9 +67,8 @@
     },
     "publish": {
       "provider": "github",
-      "owner": "adarshdeshp",
-      "repo": "DNS-CONFIGURATOR",
-      "token": "${GH_TOKEN}"
+      "owner": "adarshdeshp", 
+      "repo": "DNS-Configurator"
     }
   }
 }
