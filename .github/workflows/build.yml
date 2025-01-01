@@ -1,41 +1,21 @@
-### Updated Build Workflow
-name: Build on Push
+name: Build Workflow
 
 on:
   push:
-    branches-ignore:
+    branches:
       - main
     paths-ignore:
       - "README.md"
-      - "README-*.md"
-      - ".github/ISSUE_TEMPLATE/*"
+      - "*.md"
 
 jobs:
-  build_on_linux:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install Node v20
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build typescript files
-        run: npm run build
-
   build_on_windows:
     runs-on: windows-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install Node v20
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
@@ -44,5 +24,41 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build typescript files
+      - name: Build the application
+        run: npm run build
+
+  build_on_linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the application
+        run: npm run build
+
+  build_on_mac:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the application
         run: npm run build
